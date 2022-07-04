@@ -3,6 +3,7 @@ import { v4 as uuid } from "uuid";
 
 import db from "./../dbStrategy/db.js";
 import { userSchema }  from "./../schemas/userSchema.js";
+import { signInSchema }  from "./../schemas/signInSchema";
 
 export async function signUp(req,res) {
     const {error} = userSchema.validate(req.body, {abortEarly: false});
@@ -28,10 +29,7 @@ export async function signUp(req,res) {
 export async function signIn(req,res) {
     const data = req.body;
 
-    const signInSchema = joi.object({
-    email: joi.string().email().required(),
-    password: joi.string().required()
-    });
+    
     const { error } = signInSchema.validate(data, {abortEarly: false});
     
     if(error){
