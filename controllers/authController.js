@@ -1,12 +1,12 @@
-import joi from "joi";
 import { v4 as uuid } from "uuid";
 
 import db from "./../dbStrategy/db.js";
-import { userSchema }  from "./../schemas/userSchema.js";
-import { signInSchema }  from "./../schemas/signInSchema";
+// import  signUpSchema   from "./../schemas/signUpSchema.js";
+// import  signInSchema   from "./../schemas/signInSchema.js";
+import { signUpSchema, signInSchema } from "./../schemas/loginSchemas.js"
 
 export async function signUp(req,res) {
-    const {error} = userSchema.validate(req.body, {abortEarly: false});
+    const {error} = signUpSchema.validate(req.body, {abortEarly: false});
 
     try {
        const SALT = 10;
@@ -28,7 +28,6 @@ export async function signUp(req,res) {
 
 export async function signIn(req,res) {
     const data = req.body;
-
     
     const { error } = signInSchema.validate(data, {abortEarly: false});
     
